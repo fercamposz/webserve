@@ -9,10 +9,10 @@
 <body class="login-page">
     <div class="form-container">
         <h1>Login</h1>
-        <!-- form de login do usuario -->
-        <form>
-            <input type="text" placeholder="Usuario" required>
-            <input type="password" placeholder="Senha" required>
+        <!-- forma de login do usuario -->
+        <form action="/send_login" method="post">
+            <input type="text" placeholder="email" name="email" required>
+            <input type="password" placeholder="Senha" name="password" required>
             <button type="submit">Entrar</button>
         </form>
     </div>

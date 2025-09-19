@@ -1,71 +1,93 @@
 import os
 from http.server import SimpleHTTPRequestHandler, HTTPServer
+from urllib.parse import parse_qs
 
-
-# manipulas requisição
 class MyHandle(SimpleHTTPRequestHandler):
-    def list_directory(self, path):
+    filmes = []
+
+    def _serve_html_page(self, filename):
         try:
-            # abrir o arquivo
-            f = open(os.path.join(path, 'index.html'), 'r')
+            page_path = os.path.join(os.getcwd(), filename)
+            with open(page_path, 'r', encoding='utf-8') as f:
+                content = f.read()
             self.send_response(200)
-            self.send_header("Content-type", "text/html")
+            self.send_header("Content-type", "text/html; charset=utf-8")
             self.end_headers()
-            self.wfile.write(f.read().encode('utf-8'))
-            f.close()
-            return None
+            self.wfile.write(content.encode('utf-8'))
         except FileNotFoundError:
-            pass
-        return super().list_directory(path)
-# manipular o get
+            self.send_error(404, f"{filename} não encontrado")
+
     def do_GET(self):
-        
-        if self.path == "/login":
-            try:
-                login_path = os.path.join(os.getcwd(), "login.html")
-                with open(login_path, 'r') as login:
-                    content = login.read()
-                    self.send_response(200)
-                    self.send_header("Content-type", "text/html")
-                    self.end_headers()
-                    self.wfile.write(content.encode('utf-8'))
-            except FileNotFoundError:
-                self.send_error(404, "login.html Not Found")
-
-# Caso a requisição seja para a página de cadastro de filme
-        elif self.path == "/cadastroFilme":
-            try:
-                cadastro_path = os.path.join(os.getcwd(), "cadastroFilme.html")
-                with open(cadastro_path, 'r') as cadastro:
-                    content = cadastro.read()
-                    self.send_response(200)
-                    self.send_header("Content-type", "text/html")
-                    self.end_headers()
-                    self.wfile.write(content.encode('utf-8'))
-            except FileNotFoundError:
-                self.send_error(404, "cadastroFilme.html Not Found")
-
-# Caso a requisição seja para a página de listar filmes
+        if self.path == "/cadastroFilme":
+            self._serve_html_page("cadastroFilme.html")
         elif self.path == "/listarFilme":
-            try:
-                listar_path = os.path.join(os.getcwd(), "listarFilme.html")
-                with open(listar_path, 'r') as listar:
-                    content = listar.read()
-                    self.send_response(200)
-                    self.send_header("Content-type", "text/html")
-                    self.end_headers()
-                    self.wfile.write(content.encode('utf-8'))
-            except FileNotFoundError:
-                self.send_error(404, "listarFilme.html Not Found")
-
+            filmes_html = ""
+            for filme in self.filmes:
+                filmes_html += f"<li>{filme['titulo']} - {filme['genero']} - {filme['atores']} - {filme['diretor']} - {filme['produtora']} ({filme['ano']}) - {filme['sinopse']}  </li>\n"
+            
+            content = f"""
+            <!DOCTYPE html>
+            <html lang="pt-br">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Listar Filmes</title>
+                <link rel="stylesheet" href="styles.css">  <!-- Certifique-se de que este arquivo existe -->
+            </head>
+            <body class="listar-page">
+                <div class="list-container">
+                    <h1>Filmes Cadastrados</h1>
+                    <ul>
+                        {filmes_html}
+                    </ul>
+                </div>
+            </body>
+            </html>
+            """
+            
+            self.send_response(200)
+            self.send_header("Content-type", "text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(content.encode('utf-8'))
         else:
             super().do_GET()
 
-# Inicia o Servidor
+    def do_POST(self):
+        if self.path == "/cadastroFilme":
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length).decode('utf-8')
+            form_data = parse_qs(body)
+
+            titulo = form_data.get("titulo", [""])[0]
+            atores = form_data.get("atores", [""])[0]
+            diretor = form_data.get("diretor", [""])[0]
+            ano = form_data.get("ano", [""])[0]
+            genero = form_data.get("genero", [""])[0]
+            produtora = form_data.get("produtora", [""])[0]
+            sinopse = form_data.get("sinopse", [""])[0]
+
+            self.filmes.append({
+                "titulo": titulo,
+                "atores": atores,
+                "diretor": diretor,
+                "ano": ano,
+                "genero": genero,
+                "produtora": produtora,
+                "sinopse": sinopse
+            })
+
+            # Redireciona para listarFilme
+            self.send_response(303)
+            self.send_header('Location', '/listarFilme')
+            self.end_headers()
+        else:
+            self.send_error(404, "Rota não encontrada")
+
 def main():
     server_address = ('', 8000)
     httpd = HTTPServer(server_address, MyHandle)
-    print("Server Running in http://localhost:8000")
+    print("Servidor rodando em http://localhost:8000")
     httpd.serve_forever()
 
-main()
+if __name__ == '__main__':
+    main()
