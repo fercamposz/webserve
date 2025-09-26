@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================login =================== */
+.login-page {
+    background: rgba(240, 230, 247, 0.8);
+}
+
+.login-page .form-container {
+    background-color: #d78ad8;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-page input {
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.login-page input:focus {
+    border-color: #a842c1;
+    box-shadow: 0 0 5px rgba(193, 66, 149, 0.5);
+}
+
+.login-page button {
+    background-color: #d55db7;
+    color: white;
+    padding: 12px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.login-page button:hover {
+    background-color: #c128be;
+}
+
+.login-page button:active {
+    background-color: #842d7a;
+}
+
+/* =============== Cadastro de Filme =================== */
+.cadastro-page {
+    background: rgba(244, 241, 250, 0.8);
+    border-radius: 15px;
+}
+
+.cadastro-page .form-container {
+    background-color: #a874d8;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+}
+
+.cadastro-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cadastro-page input,
+.cadastro-page textarea {
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.cadastro-page input:focus,
+.cadastro-page textarea:focus {
+    border-color: #9162bd;
+    box-shadow: 0 0 5px rgba(120, 48, 187, 0.5);
+}
+
+.cadastro-page button {
+    background-color: #7c3bb8;
+    color: white;
+    padding: 12px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cadastro-page button:hover {
+    background-color: #792ba3;
+}
+
+.cadastro-page button:active {
+    background-color: #7229a2;
+}
+
+/* ================= Listagem de Filmes =================== */
+.listar-page {
+    background: rgba(249, 243, 249, 0.8);
+    border-radius: 15px;
+}
+
+.listar-page .list-container {
+    background-color: #9e8ee6;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.listar-page ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.listar-page li {
+    background-color: #674ed7;
+    color: white;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.listar-page li:hover {
+    background-color: #5924bc;
+    transform: scale(1.03);
+}
