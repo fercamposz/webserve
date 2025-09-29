@@ -10,6 +10,7 @@ class MyHandle(SimpleHTTPRequestHandler):
         return "Usuário Logado" if login == loga and senha == password else "Usuário não existe"
 
     def do_GET(self):
+        # Mapeamento de rotas para arquivos HTML
         rotas = {
             "/": "index.html",
             "/login": "login.html",
@@ -22,11 +23,12 @@ class MyHandle(SimpleHTTPRequestHandler):
                 with open(rotas[self.path], "r", encoding="utf-8") as f:
                     content = f.read()
                 self.send_response(200)
-                self.send_header("content-type", "text/html")
+                self.send_header("content-type", "text/html; charset=utf-8")
                 self.end_headers()
                 self.wfile.write(content.encode("utf-8"))
             except FileNotFoundError:
                 self.send_error(404, "Arquivo não encontrado.")
+            return
 
         elif self.path == "/filmes":
             arquivo = "filme.json"
@@ -39,12 +41,13 @@ class MyHandle(SimpleHTTPRequestHandler):
             else:
                 filmes = []
             self.send_response(200)
-            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
             self.wfile.write(json.dumps(filmes, ensure_ascii=False, indent=4).encode("utf-8"))
-
+            return
+      
         else:
-            self.send_error(404, "Página não encontrada")
+            return SimpleHTTPRequestHandler.do_GET(self)
 
     def do_POST(self):
         content_length = int(self.headers.get("Content-Length", 0))
@@ -61,7 +64,7 @@ class MyHandle(SimpleHTTPRequestHandler):
             logou = self.accont_user(login, password)
 
             self.send_response(200)
-            self.send_header("Content-Type", "text/html")
+            self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
             self.wfile.write(logou.encode("utf-8"))
 

@@ -20,7 +20,7 @@ h1 {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* ==================login =================== */
+/* ================== login =================== */
 .login-page {
     background: rgba(240, 230, 247, 0.8);
 }
@@ -162,4 +162,46 @@ h1 {
 .listar-page li:hover {
     background-color: #5924bc;
     transform: scale(1.03);
+}
+
+/* ================== Página Principal (index) =================== */
+
+.home-page {
+    background: linear-gradient(135deg, #4f0260, #9253da);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    color: #f4ecfa;
+}
+
+
+.home-page h1 {
+    color: #f9f5ff;
+    font-size: 3rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    margin-bottom: 10px;
+}
+
+
+.home-page a {
+    color: #f6eafc;
+    font-size: 1.3rem;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+.home-page a:hover {
+    background-color: rgba(131, 66, 172, 0.2);
+    text-decoration: underline;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
