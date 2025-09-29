@@ -10,7 +10,6 @@ class MyHandle(SimpleHTTPRequestHandler):
         return "Usuário Logado" if login == loga and senha == password else "Usuário não existe"
 
     def do_GET(self):
-        # Mapeamento de rotas para arquivos HTML
         rotas = {
             "/": "index.html",
             "/login": "login.html",
@@ -107,4 +106,5 @@ def main():
     httpd.serve_forever()
 
 if __name__ == "__main__":
+
     main()
