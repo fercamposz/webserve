@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Filme</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="cadastro-page">
+  <div class="form-container">
+    <h1>Editar Filme</h1>
+    <form id="formEditarFilme" action="/editarFilme" method="POST">
+      <input type="hidden" name="id" id="id">
+      <input type="text" name="nomeFilme" id="nomeFilme" placeholder="Nome do Filme" required><br>
+      <input type="text" name="atores" id="atores" placeholder="Atores" required><br>
+      <input type="text" name="diretor" id="diretor" placeholder="Diretor" required><br>
+      <input type="number" name="ano" id="ano" placeholder="Ano" required><br>
+      <input type="text" name="genero" id="genero" placeholder="Gênero" required><br>
+      <input type="text" name="produtora" id="produtora" placeholder="Produtora" required><br>
+      <textarea name="sinopse" id="sinopse" placeholder="Sinopse" required></textarea><br>
+      <button type="submit">Salvar Informações</button>
+    </form>
+  </div>
+</body>
+</html>

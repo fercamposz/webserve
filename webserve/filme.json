@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "nomeFilme": "Toy Story",
+        "atores": "Tom Hanks, Tim Allen, Don Rickles",
+        "diretor": "John Lasseter",
+        "ano": "1995",
+        "genero": "Animação",
+        "produtora": "Pixar Animation Studios",
+        "sinopse": "Woody, um boneco cowboy que lidera os brinquedos de Andy, entra em conflito com Buzz Lightyear, um novo boneco espacial. Juntos, eles embarcam em uma aventura para voltar para casa.\""
+    },
+    {
+        "id": 2,
+        "nomeFilme": "Teen Beach Movie",
+        "atores": "Ross Lynch, Maia Mitchell",
+        "diretor": "Jeffrey Hornaday",
+        "ano": "2013",
+        "genero": "Musical / Comédia",
+        "produtora": "Disney Channel",
+        "sinopse": "Dois adolescentes são magicamente transportados para um filme de praia dos anos 60, onde precisam se adaptar e encontrar um jeito de voltar para casa"
+    }
+]
